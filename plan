@@ -1,0 +1,20 @@
+Vill fá niðurstöðurnar birtar á eftirfarandi máta
+
+Heildartími: 43 m og 23 s
+
+Post 1:		2 m og 5 s
+Post 2:		5 m og 24 s
+Post 3:		8 m og 15 s
+
+etc etc
+
+Senda tímana á server ... líklega rathlaup.is
+
+Hafa skeiðklukku gangandi á meðan hlaupinu stendur?
+
+From receipe 9.2 in Android Cookbook:
+To implement a ListView in your Android application, you require an activity layout to host it. This should contain a ListView control
+configured to take up most of the screen layout.
+An application controls the data added to a ListView by supplying a ListAdapter using the setListAdapter() method.
+
+Also receipe 7.24 is interesting, have to read it.
