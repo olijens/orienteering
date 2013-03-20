@@ -123,6 +123,10 @@ public class MainActivity extends Activity {
     	Time time = new Time(Time.getCurrentTimezone());
     	time.setToNow();
     	IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+	 	Context context = this;
+		SharedPreferences sharedPref = this.getPreferences(Context.MODE_WORLD_READABLE);
+		serverName = sharedPref.getString("server", "");
+
     	if (scanResult != null) {
     	    // handle scan result
     		//Intent intent2 = new Intent(this, DisplayMessageActivity.class);
