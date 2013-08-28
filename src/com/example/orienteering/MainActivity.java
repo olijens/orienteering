@@ -37,7 +37,7 @@ import com.example.orienteering.IntentResult;
 public class MainActivity extends Activity {
 	//TODO manage lifecycle and have a menu item to input server into a variable.
 	//Also have the app remember the server name.
-	
+
 	public final static String EXTRA_MESSAGE = "com.example.orienteering.MESSAGE";
 	public ArrayList<Long> times = new ArrayList<Long>();
 	public long starttime;
@@ -46,44 +46,44 @@ public class MainActivity extends Activity {
 	public ArrayList<String> posts = new ArrayList<String>();
 	private String serverName;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
- 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	 	Context context = this;
+		Context context = this;
 		SharedPreferences sharedPref = this.getPreferences(Context.MODE_WORLD_READABLE);
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		System.out.println("Server pref is: " + sharedPref.getString("server", "")); 
 		if(!sharedPref.contains("server")){
-				alert.setTitle("Server name");
-				//alert.setMessage("Server");
+			alert.setTitle("Server name");
+			//alert.setMessage("Server");
 
-				// Set an EditText view to get user input 
-				final EditText input = new EditText(this);
-				alert.setView(input);
-		
-				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
+			// Set an EditText view to get user input 
+			final EditText input = new EditText(this);
+			alert.setView(input);
+
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
 					serverName = input.getText().toString();
 					// Do something with value!
-				    }
-				});
-		
-				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
+				}
+			});
+
+			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
 					// Canceled.
-				    }
-				});
-				alert.show();
-				SharedPreferences.Editor editor = sharedPref.edit();
-				editor.putString("server", serverName);
-				editor.commit();
+				}
+			});
+			alert.show();
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putString("server", serverName);
+			editor.commit();
 		} else {
-				serverName = sharedPref.getString("server", "");
+			serverName = sharedPref.getString("server", "");
 		}
-  }
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,10 +165,10 @@ public class MainActivity extends Activity {
     	}
     	// else continue with any other code you need in the method
     }
-    
-    private class httpClient extends AsyncTask<String, Void, String> {
-    	private String content = null;
-    	protected String doInBackground(String... urls) {
+
+	private class httpClient extends AsyncTask<String, Void, String> {
+		private String content = null;
+		protected String doInBackground(String... urls) {
 			HttpClient httpclient = new DefaultHttpClient();
 			//httpclient.getParams().setBooleanParameter("http.protocol.expect-continue", false);
 			//httpclient.getParams().setBooleanParameter("http.protocol.expect-continue", false);
@@ -176,29 +176,29 @@ public class MainActivity extends Activity {
 			System.out.println("ServerName is: " + serverName);
 			httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
 
-    		try {
-		        // Add your data
-		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		        //nameValuePairs.add(new BasicNameValuePair("id", "text"));
-		        nameValuePairs.add(new BasicNameValuePair("text", "Cool"));
-		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			try {
+				// Add your data
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+				//nameValuePairs.add(new BasicNameValuePair("id", "text"));
+				nameValuePairs.add(new BasicNameValuePair("text", "Cool"));
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-		        // Execute HTTP Post Request
-		        HttpResponse response = httpclient.execute(httppost);
-		        ByteArrayOutputStream out = new ByteArrayOutputStream();
-		        response.getEntity().writeTo(out);
-		        out.close();
-		        content = out.toString();
-		        System.out.println("here is content: " + content);
-		    } catch (ClientProtocolException e) {
-		        // TODO Auto-generated catch block
-		    	System.out.println("ClientProtocolException");
-		    } catch (IOException e) {
-		        // TODO Auto-generated catch block
-		    	System.out.println("IOException");
-		    }
-    		
-        	return content;
-    	}
-    }
+				// Execute HTTP Post Request
+				HttpResponse response = httpclient.execute(httppost);
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				response.getEntity().writeTo(out);
+				out.close();
+				content = out.toString();
+				System.out.println("here is content: " + content);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				System.out.println("ClientProtocolException");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("IOException");
+			}
+
+			return content;
+		}
+	}
 }
